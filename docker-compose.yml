@@ -1,0 +1,20 @@
+version: '3'
+services:
+  python_web_client:
+    build: ./docker/nginx-client
+    volumes:
+      - ./client:/app:delegated
+      - ./docker/nginx-client/config/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx-client/ssl/:/etc/nginx/ssl
+    ports:
+      - 9094:80
+
+  python_web_backend:
+    build: ./docker/python
+    container_name: python_compiler
+    ports:
+      - "5040:80"
+    restart: always
+    volumes:
+      - ./:/app:delegated
+      - ./docker/python/nginx/conf.d:/etc/nginx/conf.d
