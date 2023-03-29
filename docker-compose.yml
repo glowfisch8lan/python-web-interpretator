@@ -2,6 +2,7 @@ version: '3'
 services:
   python_web_client:
     build: ./docker/nginx-client
+    restart: always
     volumes:
       - ./client:/app:delegated
       - ./docker/nginx-client/config/conf.d:/etc/nginx/conf.d
